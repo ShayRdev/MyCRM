@@ -27,7 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
                 <div class="form-group pt-3">
                   <div class="input-field">
                     <span class="fa fa-lock p-2"></span>
-                    <input type="text" placeholder="Password">
+                    <input [type]="type" placeholder="Password">
+                    <span (click)="hideShowPassword()" class="fa {{eyeIcon}} "></span>
                   </div>
                 </div>
                 <div class="form-inline fr mt-4">
@@ -36,7 +37,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
                 <button type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
                 <div class="text-center pt-4 text-muted">
                   Dont have account? <a id="forgot" routerLink="/signup">Sign Up</a>
-                  
                 </div>
               </form>
             </div>
@@ -50,5 +50,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
+  type: string = "password"
+  isText: boolean = false;
+  eyeIcon: string = "fa-eye-slash";
+  constructor() { }
+
+  ngOnInit(): void {
+
+  }
+
+  hideShowPassword() {
+    this.isText = !this.isText;
+    this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
+    this.isText ? this.type = "text" : this.type = "password";
+  }
 
 }
